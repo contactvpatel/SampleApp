@@ -26,7 +26,7 @@ SampleApp Api is a RESTFul application that demonstrates the ability to manage T
 - Domain Driven Design (DDD) 
 - Clean Architecture
 
-## Advanced Topics
+## Additional Topics
 SampleApp Api project covered additional advanced topics
 
 - Api Versioning supporting multiple versioning scheme
