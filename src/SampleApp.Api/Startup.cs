@@ -20,7 +20,7 @@ namespace SampleApp.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // service dependencies         
+            // Service dependencies         
             services.ConfigureSampleAppServices(Configuration);
 
             // Redis Cache for Distributed Caching Purpose

@@ -11,6 +11,9 @@ namespace SampleApp.Api.Mapper
             CreateMap<TaskCreateRequest, TaskModel>();
             CreateMap<TaskUpdateRequest, TaskModel>();
             CreateMap<TaskModel, TaskResponseModel>();
+            CreateMap<TargetProductModel, Models.TargetProductModel>();
+            CreateMap<AmazonProductModel, Models.AmazonProductModel>();
+            CreateMap<MultiApiCallModel, MultiApiCallResponseModel>();
         }
     }
 }

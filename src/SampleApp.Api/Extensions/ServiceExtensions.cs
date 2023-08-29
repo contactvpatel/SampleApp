@@ -14,6 +14,9 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using SampleApp.Domain.Services;
+using SampleApp.Infrastructure.Services;
+using RestSharp;
 
 namespace SampleApp.Api.Extensions
 {
@@ -27,12 +30,20 @@ namespace SampleApp.Api.Extensions
             // Add Infrastructure Layer
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<ITargetService, TargetService>();
+            services.AddScoped<IAmazonService, AmazonService>();
 
             // Add Application Layer
             services.AddScoped<ITaskService, TaskService>();
+            services.AddScoped<IMultiApiCallService, MultiApiCallService>();
 
             // Add AutoMapper
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            //External Service Dependency (Example: TargetService, AmazonService)
+            services.AddScoped<RestClient>();
+            services.Configure<TargetServiceSettingModel>(configuration.GetSection("TargetService"));
+            services.Configure<AmazonServiceSettingModel>(configuration.GetSection("AmazonService"));
 
             // HealthChecks
             services.AddHealthChecks().AddDbContextCheck<SampleAppContext>();
@@ -194,13 +205,20 @@ namespace SampleApp.Api.Extensions
 
             services.AddSingleton(redisCacheSettings);
 
-            services.AddStackExchangeRedisCache(options =>
+            if (redisCacheSettings.Enabled)
             {
-                options.Configuration = redisCacheSettings.ConnectionString;
-                options.InstanceName = redisCacheSettings.InstanceName;
-            });
+                services.AddStackExchangeRedisCache(options =>
+                {
+                    options.Configuration = redisCacheSettings.ConnectionString;
+                    options.InstanceName = redisCacheSettings.InstanceName;
+                });
+            }
+            else
+            {
+                services.AddDistributedMemoryCache();
+            }
 
-            services.AddSingleton<Domain.Services.IRedisCacheService, Infrastructure.Services.RedisCacheService>();
+            services.AddSingleton<IRedisCacheService, RedisCacheService>();
         }
     }
 }

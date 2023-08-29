@@ -26,6 +26,8 @@ namespace SampleApp.Application.Mapper
         public SampleAppDtoMapper()
         {
             CreateMap<TaskModel, Domain.Entities.Task>().ReverseMap();
+            CreateMap<TargetProductModel, Domain.Models.TargetProductModel>().ReverseMap();
+            CreateMap<AmazonProductModel, Domain.Models.AmazonProductModel>().ReverseMap();
         }
     }
 }
