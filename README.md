@@ -1,14 +1,13 @@
 # SampleApp Api
 
-SampleApp Api is a RESTFul application that demonstrates the ability to manage Tasks (CRUD operation).
+SampleApp Api is a RESTFul application that demonstrates the ability to manage Tasks (CRUD operation) & call Multipl APIs.
 
-## Tehnology Requirements
-- Visual Studio 2022 / Code should be used to build the application 
-- ASP.NET Core Web API (version 5/6/7) 
-- If a database is used, please use SQL Server 2017 or 2019 
-- Unit tests should be used to run the application (create or update) 
+## Business Requirements
+#### Multi API ####
+- Calls should occur from the front-end WebAPI to the 2 back-end APIs in an Asynchronous manner
+- Artificial delays can be introduced to mimic a longer running operation in API2 (TargetService) and API3 (AmazonService)
 
-## Task Requirements
+#### Task API ####
 - When creating a Task, the Due Date cannot be in the past 
 - The system should not have more than 100 High Priority tasks which have the same due date and are not finished yet at any time 
 - Domain should include the following: 
@@ -25,6 +24,7 @@ SampleApp Api is a RESTFul application that demonstrates the ability to manage T
 - Test Driven Development (TDD) 
 - Dependency Injection (DI) 
 - Domain Driven Design (DDD) 
+- Clean Architecture
 
 ## Advanced Topics
 SampleApp Api project covered additional advanced topics
